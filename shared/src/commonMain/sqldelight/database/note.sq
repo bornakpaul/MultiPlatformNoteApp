@@ -1,0 +1,35 @@
+-- NOTES TABLE SCHEMA
+CREATE TABLE noteEntity(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    colorHex INTEGER NOT NULL,
+    created INTEGER NOT NULL
+);
+
+-- TO GET ALL NOTES
+getAllNotes:
+SELECT *
+FROM noteEntity;
+
+-- TO GET NOTES BY ID
+getNoteById:
+SELECT *
+FROM noteEntity
+WHERE id = ?;
+
+-- TO INTSERT NOTES
+insertNote:
+INSERT OR REPLACE
+INTO noteEntity(
+    id,
+    title,
+    colorHex,
+    content,
+    created
+) VALUES (?,?,?,?,?);
+
+-- TO DELETE NOTE BY ID
+deleteNoteById:
+DELETE FROM noteEntity
+WHERE id = ?;
