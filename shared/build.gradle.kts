@@ -1,18 +1,12 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("com.squareup.sqldelight") version "1.5.3"
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
-    
+    android()
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -40,7 +34,7 @@ kotlin {
                 implementation("com.squareup.sqldelight:android-driver:1.5.3")
             }
         }
-        val androidUnitTest by getting
+        val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -48,6 +42,7 @@ kotlin {
             dependencies {
                 implementation("com.squareup.sqldelight:native-driver:1.5.3")
             }
+
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -66,8 +61,8 @@ kotlin {
 }
 
 sqldelight {
-    database("NoteDatabase"){
-        packageName = "com.borntech.multiplatformnoteapp.database"
+    database("NoteDatabase") {
+        packageName = "com.example.multiplatformnoteapp.database"
         sourceFolders = listOf("sqldelight")
     }
 }
@@ -76,7 +71,7 @@ android {
     namespace = "com.example.multiplatformnoteapp"
     compileSdk = 33
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
     }
 }
